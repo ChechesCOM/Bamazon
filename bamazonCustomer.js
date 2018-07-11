@@ -34,7 +34,7 @@ function promptUserPurchase() {
         var item = input.item_id;
         var quantity = input.quantity;
 
-        // Query db to confirm that the given item ID exists in the desired quantity
+        // Query db to confirm that the given item ID 
         var queryStr = 'SELECT * FROM products WHERE ?';
 
         connection.query(queryStr, { item_id: item }, function (err, data) {
@@ -55,10 +55,11 @@ function promptUserPurchase() {
 
                     // Construct the updating query string
                     var updateQueryStr = 'UPDATE products SET stock_quantity = ' + (productData.stock_quantity - quantity) + ' WHERE item_id = ' + item;
-
+                           
                     // Update the inventory
                     connection.query(updateQueryStr, function (err, data) {
                         if (err) throw err;
+                        console.log(data);
 
                         console.log('Your oder has been placed! Your total is $' + productData.price * quantity);
                         console.log('Thank you for shopping with us!');
